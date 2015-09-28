@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Examples</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link href="" rel="stylesheet">
+    <script type="text/javascript">
+    //提示框
+    function salert(str) {
+        var winHeight = 0,
+            winWidth = 0,
+            win = window,
+            doc = document,
+            body = doc.body,
+            docel = doc.documentElement,
+            message = doc.getElementById("salert-box");
+        // 获取窗口宽度
+        if (win.innerWidth) {
+            winWidth = win.innerWidth;
+        } else if ((body) && (body.clientWidth)) {
+            winWidth = body.clientWidth;
+        }
+        // 获取窗口高度
+        if (win.innerHeight) {
+            winHeight = win.innerHeight;
+        } else if ((body) && (body.clientHeight)) {
+            winHeight = body.clientHeight;
+        }
+        // 通过深入 Document 内部对 body 进行检测，获取窗口大小
+        if (docel && docel.clientHeight && docel.clientWidth) {
+            winHeight = docel.clientHeight;
+            winWidth = docel.clientWidth;
+        }
+        //动态创建提示层
+        if (!message) {
+            message = doc.createElement("div");
+
+            message.id = "salert-box";
+            //设置样式
+            var style = {
+                position: "absolute",
+                top: ((winHeight / 2) - 50) + "px",
+                left: ((winWidth / 2) - 100) + "px",
+                'z-index': 1000,
+                display: 'inline-block',
+                padding: '10px',
+                'text-align': 'left',
+                background: '#fff',
+                color: '#990033',
+                border: '2px solid #666',
+                'border-radius': '10px',
+                'font-weight': 500
+            };
+            for (var i in style) {
+                message.style[i] = style[i];
+            }
+
+            body.appendChild(message);
+        } else {
+        	//清除上一次的动画
+            clearInterval(salert.stopinterval);
+            clearTimeout(salert.stoptimeout);
+            message.style.opacity = 1;
+            message.style['display'] = "block";
+        }
+        message.innerHTML = str;
+        var number = 10;
+
+        salert.stopinterval = setInterval(function() {
+            number = number - 1;
+            message.style.opacity = number / 10;
+        }, 200);
+        salert.stoptimeout = setTimeout(function() {
+            message.style['display'] = "none";
+            clearInterval(salert.stopinterval);
+        }, 2000);
+
+
+    }
+    </script>
+</head>
+
+<body>
+    <div onclick="salert('123');" class="a">sdsdfa</div>
+    <div onclick="salert('1234');" class="a">sdsdfa</div>
+</body>
+
+</html>
