@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="name" content="content" charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="css/PicSlide.css">
+</head>
+
+<body>
+    <div >
+        <div class="picslide">
+            <ul>
+                <li>
+                    <a href="" title=""><img src="images/1.jpg" alt="" title="" /></a>
+                </li>
+                <li>
+                    <a href="" title=""><img src="images/2.jpg" alt="" title="" /></a>
+                </li>
+                <li>
+                    <a href="" title=""><img src="images/3.jpg" alt="" title="" /></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+<script src="js/jquery-1.8.3.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/PicSlide.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8">
+//需要为外层设置一个高度
+$.PicSlide({
+    selector: ".picslide", //选择器
+    speed: 3000, //速度
+    dot: true, //焦点
+    autoplay: true, //是否自动播放
+    button: true //是否显示左右箭头
+});
+</script>
+
+</html>

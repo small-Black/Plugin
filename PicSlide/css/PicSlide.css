@@ -1,0 +1,80 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.picslide {
+    position: relative;
+}
+
+.picslide img {
+    width: 100%;
+}
+
+.picslide ul li {
+    display: none;
+    width: 100%;
+}
+
+.picslide ul li.absolute {
+     position: absolute;
+    left: 0;
+    top: 0;
+}
+.picslide ul li a {
+    display: block;
+}
+/*上一个与下一个按钮*/
+
+.picslide a.picslide-btn {
+    display: none;
+    width: 50px;
+    height: 50px;
+    background: RGBA(0, 0, 0, .3);
+    line-height: 50px;
+    text-align: center;
+    color: #fff;
+    font-size: 36px;
+    position: absolute;
+    top: 50%;
+    margin-top: -25px;
+    text-decoration: none;
+}
+
+.picslide:hover a.picslide-btn {
+    display: block;
+}
+
+.picslide a.picslide-next {
+    right: 0;
+}
+
+.picslide a.picslide-last {
+    left: 0;
+}
+
+
+/*焦点*/
+
+.picslide-dot {
+    position: absolute;
+    bottom: 2%;
+    left: 50%;
+}
+
+.picslide-dot span {
+    display: block;
+    background: #222;
+    border: 1px solid #fff;
+    float: left;
+    margin-right: 5px;
+    width: 15px;
+    height: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.picslide-dot span.on {
+    background: #fff;
+}
