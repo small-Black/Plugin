@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Examples</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link href="" rel="stylesheet">
+</head>
+
+<body>
+    <div>
+        <label for="username">用户名</label>
+        <input type="text" id="username" />
+    </div>
+    <div>
+        <label for="password">密码</label>
+        <input type="text" id="password" />
+    </div>
+    <div>
+        <label for="idcard">身份证</label>
+        <input type="text" id="idcard" />
+    </div>
+    <div>
+        <label for="email">邮箱</label>
+        <input type="text" id="email" />
+    </div>
+    <div>
+        <label for="qq">QQ</label>
+        <input type="text" id="qq" />
+    </div>
+    <input type="button" value="提交" id="sumbit" />
+</body>
+<script src="Verify.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8">
+Verify.init({
+    username: {
+        label: "用户名",
+        null: false,
+        username: true
+    },
+    password: {
+        label: "密码",
+        null: false,
+        password: true
+    },
+    idcard: {
+        label: "身份证",
+        null: false,
+        idcard: true
+    },
+    email: {
+        label: "邮箱",
+        null: true,
+        email: true
+    },
+    qq: {
+        label: "QQ",
+        null: true,
+        QQ: true
+    }
+});
+  var btn =  document.getElementById("sumbit");
+  btn.onclick = function(){
+  	if(!Verify.verifybool()){
+	  	return;
+  	}
+  	alert("订单提交成功");
+  };
+</script>
+
+</html>
