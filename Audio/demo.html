@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examples</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link href="audio.css" rel="stylesheet">
+</head>
+
+<body>
+    <audio src=""></audio>
+    <div class="audioplay">
+        <div class="audioplay-name">
+        </div>
+        <div class="audioplay-time"></div>
+        <div class="audioplay-box">
+            <div class="audioplay-control" status="pause">
+                <div id="audioplay-status"  class="audioplay-playing">control</div>
+            </div>
+            <div class="audioplay-progress">
+                <div class="audioplay-progress-status" style="width:0;">
+                </div>
+            </div>
+        </div>
+        <div class="audioplay-list">
+            <ul>
+                <li>1首歌曲</li>
+                <li>2首歌曲</li>
+            </ul>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+(function() {
+    function AudioPlay(options) {
+        this.audio = document.querySelector(options.dom) || null;
+        this.data = options.data || [];
+        this.autoplay = options.autoplay || false;
+        this.music_name = document.querySelector(".audioplay-name");
+        this.control = document.querySelector(".audioplay-control");
+        this.control_status = document.querySelector("#audioplay-status");
+        this.progress_status = document.querySelector(".audioplay-progress-status");
+        this.progress_stop = null;
+        this.audio ? this.init() : console.log("can not get the dom!");
+
+    }
+    AudioPlay.prototype.init = function() {
+        var data = this.data;
+        if (data.length > 0) {
+            this.music_name.innerHTML = data[0].name;
+            this.audio.src = data[0].url;
+        } else {
+            console.log("没有数据");
+        }
+        this.listener();
+    }
+    AudioPlay.prototype.progress = function() {
+        var progress = document.querySelector(".audioplay-progress");
+        var self = this,
+        	total_width = progress.clientWidth, //进度条的总宽度
+        	total_time = self.audio.duration, //音乐总时长
+            speed = total_width / total_time;//
+        self.progress_stop = setInterval(function() {
+            self.progress_status.style.width = parseFloat(self.progress_status.style.width)+ speed + "px";
+            
+        }, 1000);
+    }
+    AudioPlay.prototype.listener = function() {
+        var self = this;
+        this.audio.addEventListener("loadeddata", function() {
+            // self.play_pause();
+        });
+        this.control.addEventListener("click", function() {
+            self.playOrPause();
+            self.progress();
+        });
+        this.audio.addEventListener("ended",function(){
+			clearInterval(self.progress_stop);
+        });
+        this.audio.addEventListener("timeupdate",function(){
+			
+        });
+    }
+    AudioPlay.prototype.playOrPause = function() {
+        if (this.audio.paused) {
+            this.audio.play();
+            this.control_status.className = "audioplay-pauseing";
+            this.progress();
+        } else {
+            this.audio.pause();
+            this.control_status.className = "audioplay-playing";
+            clearInterval(this.progress_stop);
+        }
+
+
+    }
+    new AudioPlay({
+        dom: "audio",
+        autoplay: true,
+        data: [{
+            name: "有种",
+            url: "有种.mp3"
+        }]
+    });
+})();
+</script>
+
+</html>
