@@ -16,20 +16,25 @@
     <div class="audioplay">
         <div class="audioplay-name">
         </div>
-        <div class="audioplay-time"></div>
+        <div class="audioplay-time">
+            <span class="audioplay-cur-time">0</span>/<span class="audioplay-total-time">0</span>
+        </div>
         <div class="audioplay-box">
             <div class="audioplay-control" status="pause">
-                <div id="audioplay-status"  class="audioplay-playing">control</div>
+                <div id="audioplay-status" class="audioplay-playing">control</div>
             </div>
             <div class="audioplay-progress">
-                <div class="audioplay-progress-status" style="width:0;">
+                <div class="audioplay-progress-buffered">
+                </div>
+                <div class="audioplay-progress-status">
                 </div>
             </div>
         </div>
+        <div class="audioplay-volume">
+            <div class="audioplay-volume-status" style="width:100%;"> </div>
+        </div>
         <div class="audioplay-list">
             <ul>
-                <li>1首歌曲</li>
-                <li>2首歌曲</li>
             </ul>
         </div>
     </div>
@@ -37,73 +42,131 @@
 <script type="text/javascript">
 (function() {
     function AudioPlay(options) {
-        this.audio = document.querySelector(options.dom) || null;
-        this.data = options.data || [];
-        this.autoplay = options.autoplay || false;
-        this.music_name = document.querySelector(".audioplay-name");
-        this.control = document.querySelector(".audioplay-control");
-        this.control_status = document.querySelector("#audioplay-status");
-        this.progress_status = document.querySelector(".audioplay-progress-status");
-        this.progress_stop = null;
-        this.audio ? this.init() : console.log("can not get the dom!");
+        //输入
+        this.audio = document.querySelector(options.dom) || null; //audio元素
+        this.data = options.data || []; //音频数据
+        this.autoplay = options.autoplay || false; //自动播放
+
+        // 获取DOM节点
+        this.music_name = document.querySelector(".audioplay-name") || null;
+        this.control = document.querySelector(".audioplay-control") || null;
+        this.control_status = document.querySelector("#audioplay-status") || null;
+        this.total_time_dom = document.querySelector(".audioplay-total-time") || null;
+        this.cur_time_dom = document.querySelector(".audioplay-cur-time") || null;
+        this.list = document.querySelector(".audioplay-list ul") || null;
+        this.progress_status = document.querySelector(".audioplay-progress-status") || null;
+        this.progress = document.querySelector(".audioplay-progress");
+        this.volume = document.querySelector(".audioplay-volume");
+        this.volume_status = document.querySelector(".audioplay-volume-status");
+        this.progress_buffered = document.querySelector(".audioplay-progress-buffered") || null;
+
+        this.init();
+
 
     }
+    //初始化
     AudioPlay.prototype.init = function() {
+
         var data = this.data;
         if (data.length > 0) {
+            //初始化播放列表
+            for (var i = 0, len = data.length; i < len; i++) {
+                this.list.innerHTML += "<li data-url=" + data[i].url + " class=" + (i === 0 && "on") + " >" + data[i].name + "</li>";
+            }
             this.music_name.innerHTML = data[0].name;
             this.audio.src = data[0].url;
-        } else {
-            console.log("没有数据");
         }
+
         this.listener();
-    }
-    AudioPlay.prototype.progress = function() {
-        var progress = document.querySelector(".audioplay-progress");
-        var self = this,
-        	total_width = progress.clientWidth, //进度条的总宽度
-        	total_time = self.audio.duration, //音乐总时长
-            speed = total_width / total_time;//
-        self.progress_stop = setInterval(function() {
-            self.progress_status.style.width = parseFloat(self.progress_status.style.width)+ speed + "px";
-            
-        }, 1000);
-    }
+    };
+    //添加监听事件
     AudioPlay.prototype.listener = function() {
-        var self = this;
-        this.audio.addEventListener("loadeddata", function() {
-            // self.play_pause();
+        var list_li = document.querySelectorAll(".audioplay-list ul li") || null,
+            self = this,
+            audio = self.audio, //
+            total_width = self.progress.clientWidth, //进度条的总宽度
+            volume_width = self.volume.clientWidth; //音量条总宽度。
+        //加载完成，设置歌曲总时长
+        audio.addEventListener("loadeddata", function() {
+            self.total_time_dom.innerHTML = parseInt(self.audio.duration / 60) + ":" + parseInt(self.audio.duration % 60);
         });
-        this.control.addEventListener("click", function() {
+        //播放暂停控制
+        self.control.addEventListener("click", function() {
             self.playOrPause();
-            self.progress();
         });
-        this.audio.addEventListener("ended",function(){
-			clearInterval(self.progress_stop);
+        //播放完毕
+        audio.addEventListener("ended", function() {
+            self.reset();
         });
-        this.audio.addEventListener("timeupdate",function(){
-			
+        //时间改变，当前时间与进度条更新
+        audio.addEventListener("timeupdate", function() {
+            if (!isNaN(audio.duration)) {
+                self.cur_time_dom.innerHTML = parseInt(audio.currentTime / 60) + ":" + parseInt(audio.currentTime % 60);
+                self.progress_status.style.width = parseInt(audio.currentTime / audio.duration * total_width) + "px";
+            }
         });
-    }
+        //歌典加载过程中，更新缓冲进度条。
+        audio.addEventListener("progress", function() {
+            var buffered = audio.buffered.length;
+            if (buffered > 0) {
+                self.progress_buffered.style.width = audio.buffered.end(buffered - 1) / audio.duration * total_width + "px";
+            }
+        });
+        //音量控制
+        self.volume.addEventListener("click", function(e) {
+
+            audio.volume = (e.offsetX / volume_width) > 1 ? 1 : (e.offsetX / volume_width);
+            volume_status.style.width = e.offsetX + "px";
+
+        });
+        //进度条控制
+        self.progress.addEventListener("click", function(e) {
+            audio.currentTime  = parseInt((e.offsetX / total_width) * audio.duration);
+            self.progress_status.style.width = e.offsetX + "px";
+        });
+        //播放列表点击
+        Array.prototype.map.call(list_li, function(dom, index) {
+            dom.addEventListener("click", function() {
+                //设置选中状态
+                Array.prototype.map.call(list_li, function(dom) {
+                    dom.className = "";
+                });
+                dom.className = "on";
+                var dataset = dom.dataset;
+                //重新加载歌曲
+                self.music_name.innerHTML = dom.innerText;
+                audio.src = dataset.url;
+                audio.load();
+                self.reset();
+                self.playOrPause();
+            });
+        });
+    };
+    //重置歌曲状态。
+    AudioPlay.prototype.reset = function() {
+        this.progress_status.style.width = 0;
+        this.control_status.className = "audioplay-playing";
+    };
+    //播放或者暂停
     AudioPlay.prototype.playOrPause = function() {
         if (this.audio.paused) {
             this.audio.play();
             this.control_status.className = "audioplay-pauseing";
-            this.progress();
         } else {
             this.audio.pause();
             this.control_status.className = "audioplay-playing";
-            clearInterval(this.progress_stop);
         }
+    };
 
-
-    }
     new AudioPlay({
         dom: "audio",
         autoplay: true,
         data: [{
             name: "有种",
             url: "有种.mp3"
+        }, {
+            name: "K歌之王",
+            url: "K歌之王.mp3"
         }]
     });
 })();

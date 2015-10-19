@@ -60,10 +60,38 @@
 	width:80%;
 	border:1px solid #ccc;
 	height:20px;
+    position: relative;
 
 }
 .audioplay-progress-status{
 	height:100%;
-	width:5%;
 	background: #000;
+    position: absolute;
+    top:0;
+    left:0;
+    z-index: 10;
+}
+.audioplay-progress-buffered{
+    height:100%;
+    background: #ccc;
+    position: absolute;
+    top:0;
+    left:0;
+    z-index: 1;
+
+}
+.audioplay-list li{
+    cursor: pointer;
+}
+.audioplay-list li.on{
+    color:blue;
+}
+.audioplay-volume{
+    width:50%;
+    border:1px solid #ccc;
+    height:20px;
+}
+.audioplay-volume-status{
+    height:100%;
+    background: #000;
 }
