@@ -1,0 +1,222 @@
+@charset "UTF-8";
+
+/**
+ * 
+ * @authors Your Name (you@example.org)
+ * @date    2016-01-08 10:13:27
+ * @version $Id$
+ */
+
+
+/*
+ * 1. 10px = 1em = 100% = 8pt
+ * 2. 防止 iOS 横屏字号放大，同时保证在PC上 zoom 功能正常
+ */
+
+html {
+    /* 1 */
+    -ms-text-size-adjust: 100%;
+    /*2*/
+    -webkit-text-size-adjust: 100%;
+    /*2*/
+    text-size-adjust: 100%;
+    /*2*/
+    color: #000;
+    background: #fff;
+    overflow - y: scroll;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    outline: 0;
+}
+
+
+/*
+ * 1. 定义全局字体
+ * 2. 修复表单元素不能继承字体样式
+ */
+
+body,
+
+/*1*/
+
+input,
+select,
+button,
+textarea
+/*2*/
+
+{
+    font: 14px/1.5 Helvetica, sans-serif;
+}
+
+input,
+select,
+textarea {
+    font-size: 100%;
+}
+
+
+/*
+ * 1.基本的链接样式
+ * 2.去掉 IE 10+ 点击链接时的灰色背景
+ */
+
+a {
+    text-decoration: none;
+    /*1*/
+}
+
+a:hover {
+    text-decoration: none;
+    /*1*/
+}
+
+a:active {
+    background-color: transparent;
+    /*2*/
+}
+
+
+/**
+ * 去掉列表前的标识, li会继承
+ */
+
+ul,
+ol,
+li {
+    list-style-type: none;
+    list-style-image: none;
+}
+
+
+/*
+ * 移除默认边框
+ */
+
+img,
+iframe {
+    border: 0;
+    vertical-align: top;
+}
+
+
+/*
+ * 去除链接默认的下划线
+ */
+
+
+/*
+ * 移除单元格间距让其边重合 
+ */
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+
+/*
+ * 修复th不继承text-align，默认左对齐
+ */
+
+caption,
+th {
+    text-align: left;
+}
+
+
+/*
+ * 斜体扶正
+ */
+
+address,
+cite,
+dfn,
+em,
+var {
+    font-style: normal;
+}
+
+
+/*
+ * 重置标题，采用自定义
+ */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: 100%;
+    font-weight: 500;
+}
+
+
+/*
+ * 统一引用标记
+ */
+
+q:before,
+q:after {
+    content: '';
+}
+
+
+/*
+ * 统一上标和下标 
+ */
+
+sub,
+sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+
+sup {
+    top: -0.5em;
+}
+
+sub {
+    bottom: -0.25em;
+}
+
+
+/*浮动*/
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+
+/* 清除浮动 */
+
+.clear {
+    clear: both;
+}
+
+.clearfix {
+    zoom: 1;
+}
+
+.clearfix:after {
+    clear: both;
+    content: "";
+    display: block;
+    height: 0;
+    line-height: 0;
+    visibility: hidden;
+}

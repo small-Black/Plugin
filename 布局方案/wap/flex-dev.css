@@ -1,0 +1,195 @@
+@charset "UTF-8";
+
+/**
+ * 
+ * @authors Your Name (you@example.org)
+ * @date    2016-01-08 10:13:27
+ * @version $Id$
+ */
+  /*
+    注意：flex盒子对子元素中拥有绝对定位的元素不起效。 
+
+    */
+    /*转化为flex盒子*/
+    
+    .flex {
+        /* 老版本语法: Safari,  iOS, Android browser, older WebKit browsers.  */
+        display: -webkit-box;
+        /* 老版本语法: Firefox (buggy) */
+        display: -moz-box;
+        /* 混合版本语法: IE 10 */
+        display: -ms-flexbox;
+        /* 新版本语法： Chrome 21+ */
+        display: -webkit-flex;
+        /* 新版本语法： Opera 12.1, Firefox 22+ */
+        display: flex;
+    }
+    /************垂直对齐方式************/
+    /*垂直居中*/
+    
+    .flex-v-center {
+        /*老版本语法*/
+        -webkit-box-align: center;
+        -moz-box-align: center;
+        /*混合版本语法*/
+        -ms-flex-align: center;
+        /*新版本语法*/
+        -webkit-align-items: center;
+        align-items: center;
+    }
+    /*垂直顶部对齐*/
+    
+    .flex-v-start {
+        /*老版本语法*/
+        -webkit-box-align: start;
+        -moz-box-align: start;
+        /*混合版本语法*/
+        -ms-flex-align: start;
+        /*新版本语法*/
+        -webkit-align-items: flex-start;
+        align-items: flex-start;
+    }
+    /*垂直底部对齐*/
+    
+    .flex-v-end {
+        /*老版本语法*/
+        -webkit-box-align: end;
+        -moz-box-align: end;
+        /*混合版本语法*/
+        -ms-flex-align: end;
+        /*新版本语法*/
+        -webkit-align-items: flex-end;
+        align-items: flex-end;
+    }
+    /*垂直基线对齐*/
+    /*以最高元素的底部，即基线对齐*/
+    
+    .flex-v-baseline {
+        /*老版本语法*/
+        -webkit-box-align: baseline;
+        -moz-box-align: baseline;
+        /*混合版本语法*/
+        -ms-flex-align: baseline;
+        /*新版本语法*/
+        -webkit-align-items: baseline;
+        align-items: baseline;
+    }
+    /*子元素的高度为auto'，则子元素高度自适应父元素高度，但同时会遵照'min/max-width/height'属性的限制。*/
+    
+    .flex-v-stretch {
+        /*老版本语法*/
+        -webkit-box-align: stretch;
+        -moz-box-align: stretch;
+        /*混合版本语法*/
+        -ms-flex-align: stretch;
+        /*新版本语法*/
+        -webkit-align-items: stretch;
+        align-items: stretch;
+    }
+    /***********水平对齐方式**********/
+    /*水平居中*/
+    
+    .flex-h-center {
+        /*老版本语法*/
+        -webkit-box-pack: center;
+        -moz-box-pack: center;
+        /*混合版本语法*/
+        -ms-flex-pack: center;
+        /*新版本语法*/
+        -webkit-justify-content: center;
+        justify-content: center;
+    }
+    /*水平开始对齐*/
+    
+    .flex-h-start {
+        /*老版本语法*/
+        -webkit-box-pack: start;
+        -moz-box-pack: start;
+        /*混合版本语法*/
+        -ms-flex-pack: start;
+        /*新版本语法*/
+        -webkit-justify-content: flex-start;
+        justify-content: flex-start;
+    }
+    /*水平结束对齐*/
+    
+    .flex-h-end {
+        /*老版本语法*/
+        -webkit-box-pack: end;
+        -moz-box-pack: end;
+        /*混合版本语法*/
+        -ms-flex-pack: end;
+        /*新版本语法*/
+        -webkit-justify-content: flex-end;
+        justify-content: flex-end;
+    }
+    /*水平 平均分布对齐*/
+    
+    .flex-h-between {
+        /*老版本语法*/
+        -webkit-box-pack: justify;
+        -moz-box-pack: justify;
+        /*混合版本语法*/
+        -ms-flex-pack: justify;
+        /*新版本语法*/
+        -webkit-justify-content: space-between;
+        justify-content: space-between;
+    }
+    /*水平 均匀分布对齐   不支持老版本    */
+    /*第一个伸缩项目前和最后一个伸缩项目后的空间为中间伸缩项目间距的一半*/
+    
+    .flex-h-around {
+        /*混合版本语法*/
+        -ms-flex-pack: distribute;
+        /*新版本语法*/
+        -webkit-justify-content: space-around;
+        justify-content: space-around;
+    }
+    /*************************指定伸缩项目的顺序****************************/
+    /*老版本只支持整数，不支持负数*/
+    
+    .flex-child-order {
+        /*老版本语法*/
+        -webkit-box-ordinal-group: 2;
+        -moz-box-ordinal-group: 2;
+        /*混合版本语法*/
+        -ms-flex-order: 2;
+        /*新版本语法*/
+        -webkit-order: 2;
+        order: 2;
+    }
+    /*************************指定伸缩项目的伸缩尺寸****************************/
+    
+    .flex-child {
+        /*老版本语法*/
+        -webkit-box-flex: 2;
+        -moz-box-flex: 2;
+        /*混合版本语法*/
+        -ms-flex: 2;
+        /*新版本语法*/
+        -webkit-flex: 2;
+        flex: 2;
+    }
+    /*************************子元素超出父容器时是否换行****************************/
+    /*不换行*/
+    .flex-nowrap {
+        /*老版本语法*/
+        -webkit-box-lines: single;
+        -moz-box-lines: single;
+        /*混合版本语法*/
+        -ms-flex-wrap: nowrap;
+        /*新版本语法*/
+        -webkit-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+    }
+    /*换行*/
+    .flex-wrap {
+        /*老版本语法*/
+        -webkit-box-lines: multiple;
+        -moz-box-lines: multiple;
+        /*混合版本语法*/
+        -ms-flex-wrap: wrap;
+        /*新版本语法*/
+        -webkit-flex-wrap: wrap;
+        flex-wrap: wrap;
+    }
