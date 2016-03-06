@@ -1,0 +1,108 @@
+
+
+@charset "utf-8";
+* {
+    
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+body {
+  font: 14px/1.5 "Microsoft YaHei";
+  color: #666;
+}
+ul,
+li,
+ol,
+dl,
+dt,
+dd {
+    list-style: none;
+}
+.clearfix {
+    zoom: 1;
+}
+
+.clearfix:after {
+    clear: both;
+    content: "";
+    display: block;
+    height: 0;
+    line-height: 0;
+    visibility: hidden;
+}
+.left{
+    float:left;
+}
+.hide{
+    display: none;
+}
+.page {
+    @activeColor: #E2B11B;
+    @borderColor: #DAE2ED;
+    & div,
+    & .page-list li {
+        .left;
+        height: 26px;
+        line-height: 26px;
+        color: #666;
+        font-weight: bold;
+    }
+    & .prev,
+    & .next,
+    & .page-list li {
+        border: 1px solid @borderColor;
+        border-radius: 2px;
+        text-align: center;
+        padding: 0 8px;
+        margin-right: 5px;
+        cursor: pointer;
+        &:hover {
+            color: @activeColor;
+        }
+    }
+    & .prev,
+    & .next{
+        font-size: 18px;
+         padding: 0 5px;
+    }
+    & .prev.off,
+    & .next.off {
+        border: 1px solid #CCCCCC;
+        background: #ECEDEF;
+        color: #CCCCCC;
+    }
+    & .page-list li.on {
+        color: @activeColor;
+    }
+     & .page-list li.dots{
+        border:none;
+     }
+    & .gopage {
+        margin-left: 10px;
+        font-weight: normal;
+    }
+    & .gopage .page-input {
+        width: 35px;
+        height: 20px;
+        border: 1px solid @borderColor;
+        margin: 0 5px;
+    }
+    & .gopage .page-btn {
+        border: 1px solid @borderColor;
+        font-family: '微软雅黑';
+        line-height: 25px;
+        height: 25px;
+        font-size: 12px;
+        padding: 0 5px;
+        cursor: pointer;
+        margin-left: 10px;
+        background: inherit;
+        &:hover {
+            color: @activeColor;
+        }
+    }
+    & .page-err {
+        color: #C63535;
+    }
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Examples</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link href="css/page.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="page clearfix">
+        <div class="prev action">＜</div>
+        <div class="page-list">
+            <ul class="clearfix" id="page">
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+            </ul>
+        </div>
+        <div class="next action">＞</div>
+        <div class="gopage">跳转到
+            <input type="text" class="page-input" />页
+            <input type="button" class="page-btn" value="确定" />
+            <span class="page-err hide">只能为数字</span>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/page.js"></script>
+<script type="text/javascript">
+
+$.Page({
+    total: 15,//总条数
+    count: 5,//分页控件最多显示几页,
+    curnum:2,//当前要显示的页数
+    callback:function(index){console.log(index);} //回调函数
+});
+</script>
+
+</html>

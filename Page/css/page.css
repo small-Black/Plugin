@@ -1,0 +1,118 @@
+@charset "utf-8";
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+body {
+  font: 14px/1.5 "Microsoft YaHei";
+  color: #666;
+}
+ul,
+li,
+ol,
+dl,
+dt,
+dd {
+    list-style: none;
+}
+
+.clearfix {
+    zoom: 1;
+}
+
+.clearfix:after {
+    clear: both;
+    content: "";
+    display: block;
+    height: 0;
+    line-height: 0;
+    visibility: hidden;
+}
+
+.left {
+    float: left;
+}
+
+.hide {
+    display: none;
+}
+
+.page div,
+.page .page-list li {
+    float: left;
+    height: 26px;
+    line-height: 26px;
+    color: #666;
+    font-weight: bold;
+}
+
+.page .prev,
+.page .next,
+.page .page-list li {
+    border: 1px solid #DAE2ED;
+    border-radius: 2px;
+    text-align: center;
+    padding: 0 8px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.page .prev:hover,
+.page .next:hover,
+.page .page-list li:hover {
+    color: #E2B11B;
+}
+
+.page .prev,
+.page .next {
+    font-size: 18px;
+    padding: 0 5px;
+}
+
+.page .prev.off,
+.page .next.off {
+    border: 1px solid #CCCCCC;
+    background: #ECEDEF;
+    color: #CCCCCC;
+}
+
+.page .page-list li.on {
+    color: #E2B11B;
+}
+
+.page .page-list li.dots {
+    border: none;
+}
+
+.page .gopage {
+    margin-left: 10px;
+    font-weight: normal;
+}
+
+.page .gopage .page-input {
+    width: 35px;
+    height: 20px;
+    border: 1px solid #DAE2ED;
+    margin: 0 5px;
+}
+
+.page .gopage .page-btn {
+    border: 1px solid #DAE2ED;
+    font-family: '微软雅黑';
+    line-height: 25px;
+    height: 25px;
+    font-size: 12px;
+    padding: 0 5px;
+    cursor: pointer;
+    margin-left: 10px;
+    background: inherit;
+}
+
+.page .gopage .page-btn:hover {
+    color: #E2B11B;
+}
+
+.page .page-err {
+    color: #C63535;
+}
